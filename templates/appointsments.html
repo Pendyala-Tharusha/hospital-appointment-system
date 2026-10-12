@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+
+{% block title %}
+Appointments - MediCare
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <h2>Appointments</h2>
+
+    <p class="text-muted">
+        View and manage hospital appointments.
+    </p>
+
+
+    <div class="table-card mt-4">
+
+        <div class="d-flex justify-content-between mb-4">
+
+            <h4>Appointment Records</h4>
+
+            <a
+                href="{{ url_for('appointment') }}"
+                class="btn btn-primary">
+
+                + New Appointment
+
+            </a>
+
+        </div>
+
+
+        <div class="table-responsive">
+
+            <table class="table table-hover">
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Patient</th>
+                        <th>Doctor</th>
+                        <th>Specialization</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Reason</th>
+                        <th>Status</th>
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for appointment in appointments %}
+
+                    <tr>
+
+                        <td>
+                            {{ appointment["id"] }}
+                        </td>
+
+                        <td>
+                            {{ appointment["patient_name"] }}
+                        </td>
+
+                        <td>
+                            {{ appointment["doctor_name"] }}
+                        </td>
+
+                        <td>
+                            {{ appointment["specialization"] }}
+                        </td>
+
+                        <td>
+                            {{ appointment["appointment_date"] }}
+                        </td>
+
+                        <td>
+                            {{ appointment["appointment_time"] }}
+                        </td>
+
+                        <td>
+                            {{ appointment["reason"] or "-" }}
+                        </td>
+
+                        <td>
+
+                            {% if appointment["status"] == "Booked" %}
+
+                            <span class="badge bg-success">
+                                Booked
+                            </span>
+
+                            {% else %}
+
+                            <span class="badge bg-danger">
+                                Cancelled
+                            </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            {% if appointment["status"] == "Booked" %}
+
+                            <form
+                                method="POST"
+                                action="{{ url_for(
+                                    'cancel_appointment',
+                                    appointment_id=appointment['id']
+                                ) }}"
+                                onsubmit="return confirmCancellation();">
+
+                                <button
+                                    class="btn btn-danger btn-sm">
+
+                                    Cancel
+
+                                </button>
+
+                            </form>
+
+                            {% else %}
+
+                            <span class="text-muted">
+                                Cancelled
+                            </span>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% else %}
+
+                    <tr>
+
+                        <td
+                            colspan="9"
+                            class="text-center">
+
+                            No appointments found.
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

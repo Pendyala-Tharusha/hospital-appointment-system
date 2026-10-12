@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %}
+Search - MediCare
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="text-center mb-5">
+
+        <h2>Search Patient</h2>
+
+        <p class="text-muted">
+            Search by patient name, phone or email.
+        </p>
+
+    </div>
+
+
+    <div class="search-card">
+
+        <form
+            method="GET"
+            action="{{ url_for('search') }}">
+
+            <div class="input-group">
+
+                <input
+                    type="text"
+                    name="query"
+                    class="form-control"
+                    placeholder="Enter patient name, phone or email"
+                    value="{{ query }}">
+
+                <button
+                    class="btn btn-primary">
+
+                    🔎 Search
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    {% if query %}
+
+    <div class="table-card mt-4">
+
+        <h4>
+            Search Results
+        </h4>
+
+        <div class="table-responsive mt-3">
+
+            <table class="table table-hover">
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Address</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for patient in patients %}
+
+                    <tr>
+
+                        <td>{{ patient["id"] }}</td>
+                        <td>{{ patient["name"] }}</td>
+                        <td>{{ patient["age"] }}</td>
+                        <td>{{ patient["gender"] }}</td>
+                        <td>{{ patient["phone"] }}</td>
+                        <td>{{ patient["email"] or "-" }}</td>
+                        <td>{{ patient["address"] or "-" }}</td>
+
+                    </tr>
+
+                    {% else %}
+
+                    <tr>
+
+                        <td
+                            colspan="7"
+                            class="text-center">
+
+                            No patient found.
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

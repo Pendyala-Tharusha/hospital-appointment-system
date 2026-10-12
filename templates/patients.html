@@ -1,0 +1,200 @@
+{% extends "base.html" %}
+
+{% block title %}
+Patients - MediCare
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <h2>Patient Registration</h2>
+
+    <p class="text-muted">
+        Register new patients and view patient records.
+    </p>
+
+
+    <div class="form-card mt-4">
+
+        <h4>Register New Patient</h4>
+
+        <form
+            method="POST"
+            action="{{ url_for('register_patient') }}">
+
+            <div class="row g-3">
+
+                <div class="col-md-6">
+
+                    <label>Full Name *</label>
+
+                    <input
+                        type="text"
+                        name="name"
+                        class="form-control"
+                        required>
+
+                </div>
+
+
+                <div class="col-md-3">
+
+                    <label>Age *</label>
+
+                    <input
+                        type="number"
+                        name="age"
+                        class="form-control"
+                        min="1"
+                        max="120"
+                        required>
+
+                </div>
+
+
+                <div class="col-md-3">
+
+                    <label>Gender *</label>
+
+                    <select
+                        name="gender"
+                        class="form-select"
+                        required>
+
+                        <option value="">
+                            Select
+                        </option>
+
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Other</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="col-md-6">
+
+                    <label>Phone *</label>
+
+                    <input
+                        type="tel"
+                        name="phone"
+                        class="form-control"
+                        required>
+
+                </div>
+
+
+                <div class="col-md-6">
+
+                    <label>Email</label>
+
+                    <input
+                        type="email"
+                        name="email"
+                        class="form-control">
+
+                </div>
+
+
+                <div class="col-12">
+
+                    <label>Address</label>
+
+                    <textarea
+                        name="address"
+                        class="form-control"
+                        rows="3">
+                    </textarea>
+
+                </div>
+
+
+                <div class="col-12">
+
+                    <button
+                        class="btn btn-primary">
+
+                        Register Patient
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <div class="table-card mt-5">
+
+        <h4>Registered Patients</h4>
+
+        <div class="table-responsive">
+
+            <table class="table table-hover">
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Address</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for patient in patients %}
+
+                    <tr>
+
+                        <td>{{ patient["id"] }}</td>
+                        <td>{{ patient["name"] }}</td>
+                        <td>{{ patient["age"] }}</td>
+                        <td>{{ patient["gender"] }}</td>
+                        <td>{{ patient["phone"] }}</td>
+                        <td>{{ patient["email"] or "-" }}</td>
+                        <td>{{ patient["address"] or "-" }}</td>
+
+                    </tr>
+
+                    {% else %}
+
+                    <tr>
+
+                        <td
+                            colspan="7"
+                            class="text-center">
+
+                            No patients registered.
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

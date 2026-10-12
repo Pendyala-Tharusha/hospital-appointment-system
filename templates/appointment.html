@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% block title %}
+Book Appointment - MediCare
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="text-center mb-5">
+
+        <h2>Book an Appointment</h2>
+
+        <p class="text-muted">
+            Select a patient, doctor, date and time.
+        </p>
+
+    </div>
+
+
+    <div class="appointment-card">
+
+        <form
+            method="POST"
+            action="{{ url_for('book_appointment') }}">
+
+            <div class="row g-4">
+
+                <div class="col-md-6">
+
+                    <label>Select Patient *</label>
+
+                    <select
+                        name="patient_id"
+                        class="form-select"
+                        required>
+
+                        <option value="">
+                            Select Patient
+                        </option>
+
+                        {% for patient in patients %}
+
+                        <option value="{{ patient['id'] }}">
+
+                            {{ patient["name"] }}
+                            -
+                            {{ patient["phone"] }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <div class="col-md-6">
+
+                    <label>Select Doctor *</label>
+
+                    <select
+                        name="doctor_id"
+                        class="form-select"
+                        required>
+
+                        <option value="">
+                            Select Doctor
+                        </option>
+
+                        {% for doctor in doctors %}
+
+                        <option value="{{ doctor['id'] }}">
+
+                            {{ doctor["name"] }}
+                            -
+                            {{ doctor["specialization"] }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <div class="col-md-6">
+
+                    <label>Appointment Date *</label>
+
+                    <input
+                        type="date"
+                        name="appointment_date"
+                        id="appointmentDate"
+                        class="form-control"
+                        required>
+
+                </div>
+
+
+                <div class="col-md-6">
+
+                    <label>Appointment Time *</label>
+
+                    <input
+                        type="time"
+                        name="appointment_time"
+                        class="form-control"
+                        required>
+
+                </div>
+
+
+                <div class="col-12">
+
+                    <label>Reason for Visit</label>
+
+                    <textarea
+                        name="reason"
+                        class="form-control"
+                        rows="4"
+                        placeholder="Enter reason for visit">
+                    </textarea>
+
+                </div>
+
+
+                <div class="col-12 text-center">
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary btn-lg">
+
+                        📅 Book Appointment
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

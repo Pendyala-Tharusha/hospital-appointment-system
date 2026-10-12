@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home - MediCare
+{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-7">
+
+                <h1>
+                    Quality Healthcare,
+                    <br>
+                    Anytime, Anywhere.
+                </h1>
+
+                <p>
+                    Book appointments with experienced
+                    doctors quickly and easily.
+                </p>
+
+                <a
+                    href="{{ url_for('appointment') }}"
+                    class="btn btn-light btn-lg">
+
+                    Book Appointment
+
+                </a>
+
+                <a
+                    href="{{ url_for('doctors') }}"
+                    class="btn btn-outline-light btn-lg ms-2">
+
+                    View Doctors
+
+                </a>
+
+            </div>
+
+            <div class="col-lg-5 text-center">
+
+                <div class="hero-icon">
+                    🏥
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="container py-5">
+
+    <div class="text-center mb-5">
+
+        <h2>Our Services</h2>
+
+        <p class="text-muted">
+            Easy and convenient hospital appointment management.
+        </p>
+
+    </div>
+
+
+    <div class="row g-4">
+
+        <div class="col-md-4">
+
+            <div class="service-card">
+
+                <div class="service-icon">
+                    👨‍⚕️
+                </div>
+
+                <h4>Expert Doctors</h4>
+
+                <p>
+                    Consult doctors from different
+                    medical specialties.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="service-card">
+
+                <div class="service-icon">
+                    📅
+                </div>
+
+                <h4>Easy Booking</h4>
+
+                <p>
+                    Book your appointment in a few
+                    simple steps.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="service-card">
+
+                <div class="service-icon">
+                    🔒
+                </div>
+
+                <h4>Secure Records</h4>
+
+                <p>
+                    Patient and appointment details
+                    are stored in the database.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="stats-section">
+
+    <div class="container">
+
+        <div class="row text-center">
+
+            <div class="col-md-4">
+
+                <h2>
+                    {{ doctor_count }}
+                </h2>
+
+                <p>Doctors</p>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <h2>
+                    {{ patient_count }}
+                </h2>
+
+                <p>Patients</p>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <h2>
+                    {{ appointment_count }}
+                </h2>
+
+                <p>Appointments</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
